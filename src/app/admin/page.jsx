@@ -31,6 +31,9 @@ export default function AdminView() {
   const [homeViewFormData, setHomeViewFormData] = useState(initialHomeFormData);
   const [aboutViewFormData, setAboutViewFormData] =
     useState(initialAboutFormData);
+  const [experienceViewFormData, setExperienceViewFormData] = useState(
+    initialExperienceFormData
+  );
   const menuItem = [
     {
       id: "home",
@@ -55,7 +58,12 @@ export default function AdminView() {
     {
       id: "experience",
       label: "Experience",
-      component: <AdminExperienceView />,
+      component: (
+        <AdminExperienceView
+          formData={experienceViewFormData}
+          setFormData={setExperienceViewFormData}
+        />
+      ),
     },
     {
       id: "education",
