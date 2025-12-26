@@ -6,7 +6,7 @@ import AdminEducationView from "@/components/admin-view/education";
 import AdminExperienceView from "@/components/admin-view/experience";
 import AdminHomeView from "@/components/admin-view/home";
 import AdminProjectView from "@/components/admin-view/project";
-import { addData, getData } from "@/services";
+import { addData, getData, updateData } from "@/services";
 import { use, useEffect, useState } from "react";
 
 const initialHomeFormData = {
@@ -53,6 +53,8 @@ export default function AdminView() {
     initialProjectFormData
   );
   const [allData, setAllData] = useState({});
+  const [update, setUpdate] = useState(false);
+
   const menuItem = [
     {
       id: "home",
@@ -124,11 +126,10 @@ export default function AdminView() {
       education: educationViewFormData,
       project: projectViewFormData,
     };
-    const response = await addData(
-      currentSelectedTab,
-      dataMap[currentSelectedTab]
-    );
-    console.log(response, "response");
+    const response = update
+      ? await updateData(currentSelectedTab, dataMap[currentSelectedTab])
+      : await addData(currentSelectedTab, dataMap[currentSelectedTab]);
+
     if (response.success) {
       resetFormData();
       extractAllData();
@@ -148,8 +149,9 @@ export default function AdminView() {
       response.data.length
     ) {
       setHomeViewFormData(response && response.data[0]);
+      setUpdate(true);
     }
-    /*
+    /* if condition description:
        Are we on the Home tab? Did we get a response? Does response contain data? Is there at least one record? 
     */
     if (
@@ -159,6 +161,7 @@ export default function AdminView() {
       response.data.length
     ) {
       setAboutViewFormData(response && response.data[0]);
+      setUpdate(true);
     }
     if (response?.success) {
       // Only proceed if backend says success = true
@@ -168,7 +171,7 @@ export default function AdminView() {
       });
     }
   }
-  console.log(allData, homeViewFormData, "homeViewFormData");
+
   function resetFormData() {
     setHomeViewFormData(initialHomeFormData);
     setAboutViewFormData(initialAboutFormData);
@@ -187,6 +190,7 @@ export default function AdminView() {
             onClick={() => {
               setCurrentSelectedTab(item.id);
               resetFormData();
+              setUpdate(false);
             }}
           >
             {item.label}

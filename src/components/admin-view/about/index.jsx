@@ -4,7 +4,7 @@ import FormControls from "../form-controls";
 
 const controls = [
   {
-    name: "about me",
+    name: "aboutme",
     placeholder: "About me",
     type: "text",
     label: "About me",
@@ -52,7 +52,7 @@ export default function AdminAboutView({
           onClick={() => handleSaveData("about")}
           className="mt-[5px] border border-blue-600 bg-blue-600 text-white p-3 font-bold text-[16px] focus:bg-green-800 rounded-md"
         >
-          Add Info
+          Save Changes
         </button>
       </div>
       ;
