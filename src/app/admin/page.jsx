@@ -5,8 +5,9 @@ import AdminContactView from "@/components/admin-view/contact";
 import AdminEducationView from "@/components/admin-view/education";
 import AdminExperienceView from "@/components/admin-view/experience";
 import AdminHomeView from "@/components/admin-view/home";
+import Login from "@/components/admin-view/login";
 import AdminProjectView from "@/components/admin-view/project";
-import { addData, getData, updateData } from "@/services";
+import { addData, getData, login, updateData } from "@/services";
 import { use, useEffect, useState } from "react";
 
 const initialHomeFormData = {
@@ -38,6 +39,11 @@ const initialProjectFormData = {
   technologies: "",
   github: "",
 };
+const initializeLoginFormData = {
+  username: "",
+  password: "",
+};
+
 export default function AdminView() {
   const [currentSelectedTab, setCurrentSelectedTab] = useState("home");
   const [homeViewFormData, setHomeViewFormData] = useState(initialHomeFormData);
@@ -54,6 +60,8 @@ export default function AdminView() {
   );
   const [allData, setAllData] = useState({});
   const [update, setUpdate] = useState(false);
+  const [authUser, setAuthUser] = useState(false);
+  const [loginFormData, setLoginFormData] = useState(initializeLoginFormData);
 
   const menuItem = [
     {
@@ -98,6 +106,7 @@ export default function AdminView() {
           formData={educationViewFormData}
           setFormData={setEducationViewFormData}
           handleSaveData={handleSaveData}
+          data={allData?.education}
         />
       ),
     },
@@ -109,6 +118,7 @@ export default function AdminView() {
           formData={projectViewFormData}
           setFormData={setProjectViewFormData}
           handleSaveData={handleSaveData}
+          data={allData?.project}
         />
       ),
     },
@@ -180,6 +190,29 @@ export default function AdminView() {
     setEducationViewFormData(initialEducationFormData);
     setProjectViewFormData(initialProjectFormData);
   }
+
+  async function handleLogin() {
+    const res = await login(loginFormData);
+    console.log(res, "login");
+
+    if (res?.success) {
+      setAuthUser(true);
+      sessionStorage.setItem("authUser", JSON.stringify(true));
+    }
+  }
+
+  useEffect(() => {
+    setAuthUser(JSON.parse(sessionStorage.getItem("authUser")));
+  }, []);
+
+  if (!authUser)
+    return (
+      <Login
+        formData={loginFormData}
+        setFormData={setLoginFormData}
+        handleLogin={handleLogin}
+      />
+    );
   return (
     <div className="border-b border-gray-400">
       <nav className="-mb-0.5 flex justify-center space-x-6" role="tablist">

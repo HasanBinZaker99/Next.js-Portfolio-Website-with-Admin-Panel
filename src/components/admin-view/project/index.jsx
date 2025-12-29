@@ -31,10 +31,43 @@ export default function AdminProjectView({
   formData,
   setFormData,
   handleSaveData,
+  data,
 }) {
   return (
     <div className="w-full">
       <div className="bg-[#d7d7d7] shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="mb-10 space-y-6">
+          {data && data.length ? (
+            data.map((item, index) => (
+              <div
+                key={index}
+                className=" bg-[#ffffff] flex flex-col gap-2 p-6 rounded-lg shadow-md border border-green-600 hover:border-green-800 transition duration-300"
+              >
+                <p className="text-lg font-semibold text-grey-700">
+                  Name : {item.name}
+                </p>
+                <p className="text-lg font-semibold text-grey-700">
+                  <a href={item.website} target="/blank">
+                    website : {item.website}
+                  </a>
+                </p>
+                <p className="text-lg font-semibold text-grey-700">
+                  technologies : {item.technologies}
+                </p>
+                <p className="text-lg font-semibold text-grey-700">
+                  <a href={item.github} target="/blank">
+                    {" "}
+                    github : {item.github}
+                  </a>
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-600">
+              No project data is available
+            </p>
+          )}
+        </div>
         <FormControls
           controls={controls}
           formData={formData}
