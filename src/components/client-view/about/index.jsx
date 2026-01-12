@@ -58,6 +58,7 @@ export default function ClientAboutView({ data }) {
         <AnimationWrapper className="rounded-lg w-full grid-flow-row grid grid-cols-1 sm:grid-cols-3 py-9 divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-green-500 bg-ehite-500 z-10">
           {aboutDataInfo.map((infoItem, index) => (
             <motion.div
+              key={infoItem.label}
               className={`flex items-center justify-start ${
                 index === 0
                   ? "sm:justify-start"
@@ -104,7 +105,6 @@ export default function ClientAboutView({ data }) {
               src={about}
               alt="about image"
               layout="responsive"
-              quality={100}
               height={414}
               width={508}
             ></Image>

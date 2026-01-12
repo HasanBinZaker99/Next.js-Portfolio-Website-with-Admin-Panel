@@ -26,6 +26,7 @@ export default function ClientExperienceAndEducationView({
               <h1 className="leading-[70px] mb-4 text-3xl lg:text-4xl xl:text-5xl font-bold">
                 {"My Experience".split(" ").map((item, index) => (
                   <span
+                    key={`${item}-${index}`}
                     className={`${
                       index === 1 ? "text-green-500" : "text-black"
                     }`}
@@ -126,7 +127,12 @@ export default function ClientExperienceAndEducationView({
                 >
                   {educationData && educationData.length
                     ? educationData.map((educationItem) => (
-                        <TimelineItem>
+                        <TimelineItem
+                          key={
+                            educationItem._id ||
+                            `${educationItem.college}-${educationItem.year}`
+                          }
+                        >
                           <TimelineSeparator>
                             <TimelineDot
                               sx={{

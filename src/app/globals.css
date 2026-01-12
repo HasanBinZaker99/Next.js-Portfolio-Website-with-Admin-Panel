@@ -4,3 +4,23 @@
   --background: #ffffff;
   --foreground: #171717;
 }
+
+/* ===== Project horizontal scroll styles ===== */
+.project-wrapper {
+  display: flex;
+  list-style: none;
+  height: 350px;
+
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 20px 0;
+  gap: 20px;
+  scroll-snap-type: x mandatory;
+}
+
+.project-wrapper li {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+}
