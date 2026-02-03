@@ -51,13 +51,13 @@ export default function AdminView() {
   const [aboutViewFormData, setAboutViewFormData] =
     useState(initialAboutFormData);
   const [experienceViewFormData, setExperienceViewFormData] = useState(
-    initialExperienceFormData
+    initialExperienceFormData,
   );
   const [educationViewFormData, setEducationViewFormData] = useState(
-    initialEducationFormData
+    initialEducationFormData,
   );
   const [projectViewFormData, setProjectViewFormData] = useState(
-    initialProjectFormData
+    initialProjectFormData,
   );
   const [allData, setAllData] = useState({});
   const [update, setUpdate] = useState(false);
@@ -126,7 +126,7 @@ export default function AdminView() {
     {
       id: "contact",
       label: "Contact",
-      component: <AdminContactView />,
+      component: <AdminContactView data={allData && allData?.contact} />,
     },
   ];
 
@@ -244,7 +244,7 @@ export default function AdminView() {
       </nav>
       <div className="mt-10 p-10">
         {menuItem.map(
-          (item) => item.id === currentSelectedTab && item.component
+          (item) => item.id === currentSelectedTab && item.component,
         )}
       </div>
     </div>
