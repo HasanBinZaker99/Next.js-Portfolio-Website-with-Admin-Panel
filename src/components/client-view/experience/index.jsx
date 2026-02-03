@@ -69,19 +69,31 @@ export default function ClientExperienceAndEducationView({
                           </TimelineSeparator>
                           <TimelineContent>
                             <div className="border-[2px] p-4 rounded-[8px] border-green-500 mt-[14px] ml-[16px]">
-                              <p className="font-bold">
-                                {experienceItem.duration}
+                              <p className="font-extrabold ">
+                                {experienceItem.position}
                               </p>
                               <p className="font-extrabold mt-2">
                                 {experienceItem.company},{" "}
                                 {experienceItem.location}
                               </p>
-                              <p className="font-extrabold mt-2">
-                                {experienceItem.position}
-                              </p>
                               <p className="font-bold mt-2">
-                                {experienceItem.jobprofile}
+                                {experienceItem.duration}
                               </p>
+                              <ul className="mt-2 space-y-1">
+                                {experienceItem.jobprofile
+                                  .split("|")
+                                  .map((line, index) => (
+                                    <li
+                                      key={index}
+                                      className="text-sm text-gray-700 flex gap-2"
+                                    >
+                                      <span className="text-green-900 font-bold">
+                                        .
+                                      </span>
+                                      <span>{line.trim()}</span>
+                                    </li>
+                                  ))}
+                              </ul>
                             </div>
                           </TimelineContent>
                         </TimelineItem>

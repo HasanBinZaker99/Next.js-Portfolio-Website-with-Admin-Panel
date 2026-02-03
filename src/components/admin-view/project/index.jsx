@@ -13,6 +13,7 @@ const controls = [
     type: "text",
     label: "Website Name",
   },
+
   {
     name: "technologies",
     placeholder: "Enter Technologies",
@@ -24,6 +25,12 @@ const controls = [
     placeholder: "Github",
     type: "text",
     label: "Github",
+  },
+  {
+    name: "youtube",
+    placeholder: "Youtube Name",
+    type: "text",
+    label: "Youtube Name",
   },
 ];
 
@@ -54,10 +61,17 @@ export default function AdminProjectView({
                 <p className="text-lg font-semibold text-grey-700">
                   technologies : {item.technologies}
                 </p>
+
                 <p className="text-lg font-semibold text-grey-700">
                   <a href={item.github} target="/blank">
                     {" "}
                     github : {item.github}
+                  </a>
+                </p>
+                <p className="text-lg font-semibold text-grey-700">
+                  <a href={item.youtube} target="/blank">
+                    {" "}
+                    youtube : {item.youtube}
                   </a>
                 </p>
               </div>

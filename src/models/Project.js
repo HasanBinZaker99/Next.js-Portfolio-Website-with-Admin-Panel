@@ -3,6 +3,7 @@ const ProjectSchema = new mongoose.Schema(
   {
     name: String,
     website: String,
+    youtube: String,
     technologies: String,
     github: String,
   },

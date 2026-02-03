@@ -7,6 +7,7 @@ import {
   FaLinkedinIn,
   FaInstagram,
   FaTwitter,
+  FaGlobe,
 } from "react-icons/fa";
 import Image from "next/image";
 import home from "../../../assets/home.png";
@@ -29,6 +30,19 @@ function variants() {
 }
 const socialIcons = [
   {
+    id: "website",
+    icon: (
+      <a
+        href="https://hasanzaker.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {" "}
+        <FaGlobe color="rgba(13, 183, 96,1)" className="w-[40px] h-[40px]" />
+      </a>
+    ),
+  },
+  {
     id: "facebook",
     icon: (
       <FaFacebookF color="rgba(13, 183, 96,1)" className="w-[40px] h-[40px]" />
@@ -43,7 +57,17 @@ const socialIcons = [
   {
     id: "linkedin",
     icon: (
-      <FaLinkedinIn color="rgba(13, 183, 96,1)" className="w-[40px] h-[40px]" />
+      <a
+        href="https://www.linkedin.com/in/md-hasan-zaker-30000829a/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {" "}
+        <FaLinkedinIn
+          color="rgba(13, 183, 96,1)"
+          className="w-[40px] h-[40px]"
+        />
+      </a>
     ),
   },
   {
@@ -110,9 +134,9 @@ export default function ClientHomeView({ data }) {
             <motion.div
               drag
               dragConstraints={containerRef}
-              className="w-[400px] h-[400px] relative bg-green-500 rounded-lg shadow-2xl"
+              className="w-[400px] h-[400px] relative rounded-lg"
             >
-              <div className="w-[400px] h-[400px] top-[40px] left-[-30px] rounded-lg border-[6px] border-gray-800 absolute"></div>
+              <div className="w-[400px] h-[400px]  rounded-lg border-[6px] border-gray-800 absolute"></div>
               <Image
                 src={home}
                 alt="home"

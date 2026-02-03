@@ -38,6 +38,7 @@ const initialProjectFormData = {
   website: "",
   technologies: "",
   github: "",
+  youtube: "",
 };
 const initializeLoginFormData = {
   username: "",

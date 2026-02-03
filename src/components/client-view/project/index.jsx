@@ -106,7 +106,7 @@ export default function ClientProjectView({ data = [] }) {
                     ))}
                   </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 flex  gap-6 px-6">
+                  <div className="absolute bottom-0 left-0 right-0 flex  gap-3 px-3">
                     {item.website?.trim() && (
                       <button
                         type="button"
@@ -116,7 +116,15 @@ export default function ClientProjectView({ data = [] }) {
                         Website
                       </button>
                     )}
-
+                    {item.youtube?.trim() && (
+                      <button
+                        type="button"
+                        onClick={() => router.push(item.youtube)}
+                        className="w-[140px] py-3 bg-green-500 text-white text-lg font-bold rounded-xl"
+                      >
+                        Youtube
+                      </button>
+                    )}
                     {item.github?.trim() && (
                       <button
                         type="button"

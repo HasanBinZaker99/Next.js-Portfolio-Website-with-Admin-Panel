@@ -89,6 +89,7 @@ export default function ClientAboutView({ data }) {
           <h1 className="leading-[70px] mb-4 text-3xl lg:text-4xl xl:text-5xl font-medium">
             {headingText.split(" ").map((item, index) => (
               <span
+                key={`${item}-${index}`}
                 className={`${index === 6 ? "text-green-500" : "text-black"}`}
               >
                 {item}{" "}
@@ -117,6 +118,7 @@ export default function ClientAboutView({ data }) {
           >
             {data?.skills.split(",").map((skill) => (
               <motion.div
+                key={`${skill}`}
                 className="w-full flex justify-center items-center"
                 variants={skillItemVariant}
               >
