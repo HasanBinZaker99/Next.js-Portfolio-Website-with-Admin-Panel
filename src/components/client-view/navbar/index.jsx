@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Children } from "react";
 import logo from "../../../assets/logo.png";
 import { Link as LinkScroll, scroller } from "react-scroll";
+import { IoIosArrowDroprightCircle } from "react-icons/io";
 
 const menuItems = [
   {
@@ -16,6 +17,10 @@ const menuItems = [
   {
     id: "experience",
     label: "Experience",
+    children: [
+      { id: "certificate", label: "Certificate" },
+      { id: "problem-solving", label: "Problem Solving (LeetCode)" },
+    ],
   },
   {
     id: "project",
@@ -28,22 +33,49 @@ const menuItems = [
 ];
 function CreateMenus({ activeLink, getMenuItems, setActiveLink }) {
   return getMenuItems.map((item) => (
-    <LinkScroll
-      activeClass="active"
-      key={item.id}
-      to={item.id}
-      spy={true}
-      smooth={true}
-      duration={1000}
-      onSetActive={() => setActiveLink(item.id)}
-      className={`px-4 py-2 mx-2 cursor-pointer  inline-block relative ${
-        activeLink === item.id
-          ? "text-green-500 font-bold underline decoration-green-500 underline-offset-6 animation-active "
-          : " text-[#000] font-bold hover:underline hover:decoration-green-500   hover:text-green-500 hover:underline-offset-6"
-      }`}
-    >
-      {item.label}
-    </LinkScroll>
+    <div key={item.id} className="relative inline-block group pb-2">
+      <LinkScroll
+        activeClass="active"
+        key={item.id}
+        to={item.id}
+        spy={true}
+        smooth={true}
+        duration={1000}
+        onSetActive={() => setActiveLink(item.id)}
+        className={`px-4 py-2 mx-2 cursor-pointer  inline-block relative ${
+          activeLink === item.id
+            ? "text-green-500 font-bold underline decoration-green-500 underline-offset-6 animation-active "
+            : " text-[#000] font-bold hover:underline hover:decoration-green-500   hover:text-green-500 hover:underline-offset-6"
+        }`}
+      >
+        {item.label}
+      </LinkScroll>
+
+      {item.children && (
+        <ul
+          className="absolute top-full group-hover:block  bg-[oklch(96.8%_0.007_246.508)] shadow-lg rounded-md w-max min-w-max border border-gray-100     opacity-0 translate-y-2 scale-95
+    group-hover:opacity-100
+    group-hover:translate-y-0
+    group-hover:scale-100
+    transition-all duration-300 ease-out"
+        >
+          {item.children.map((child) => (
+            <li key={child.id}>
+              <LinkScroll
+                to={child.id}
+                smooth={true}
+                duration={800}
+                className="whitespace-nowrap px-4 py-2 inline-flex items-center text-black font-semibold hover:bg-green-50 hover:text-green-600 cursor-pointer transition-all duration-200 hover:translate-x-1"
+                onClick={() => setActiveLink(child.id)}
+              >
+                <IoIosArrowDroprightCircle className="mr-1 text-gray-400 text-sm transition-colors duration-200 group-hover:text-green-600 shrink-0" />
+                {child.label}
+              </LinkScroll>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   ));
 }
 

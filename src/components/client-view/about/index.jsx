@@ -35,7 +35,7 @@ export default function ClientAboutView({ data }) {
   const setVariants = useMemo(() => variants(), []);
   const aboutDataInfo = [
     {
-      label: "client",
+      label: "clients",
       value: data?.noofclients || "0",
     },
     {
@@ -63,8 +63,8 @@ export default function ClientAboutView({ data }) {
                 index === 0
                   ? "sm:justify-start"
                   : index === 1
-                  ? "sm:justify-center"
-                  : "sm:justify-end"
+                    ? "sm:justify-center"
+                    : "sm:justify-end"
               } py-4 sm:py-6 w-8//12 px-4 sm:w-auto mx-auto sm:mx-0`}
               key={index}
               custom={{ duration: 2 + index }}

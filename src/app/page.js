@@ -5,13 +5,10 @@ import ClientHomeView from "@/components/client-view/home";
 import ClientProjectView from "@/components/client-view/project";
 
 async function extractAllDatas(currentSection) {
-  const res = await fetch(
-    `https://gleeful-peony-5f9d4a.netlify.app/api/${currentSection}/get`,
-    {
-      method: "GET",
-      cache: "no-store",
-    },
-  );
+  const res = await fetch(`http://localhost:3000/api/${currentSection}/get`, {
+    method: "GET",
+    cache: "no-store",
+  });
   const data = await res.json();
   return data && data.data;
 }
