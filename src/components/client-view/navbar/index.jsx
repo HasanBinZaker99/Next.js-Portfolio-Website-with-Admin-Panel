@@ -65,6 +65,7 @@ function CreateMenus({ activeLink, getMenuItems, setActiveLink }) {
                 to={child.id}
                 smooth={true}
                 duration={800}
+                offset={-80}
                 className="whitespace-nowrap px-4 py-2 inline-flex items-center text-black font-semibold hover:bg-green-50 hover:text-green-600 cursor-pointer transition-all duration-200 hover:translate-x-1"
                 onClick={() => setActiveLink(child.id)}
               >
@@ -83,6 +84,7 @@ export default function Navbar() {
   const [activeLink, setActiveLink] = useState("home");
   const [scrollActive, setScrollActive] = useState(false);
   const [pulse, setPulse] = useState(true);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -129,6 +131,18 @@ export default function Navbar() {
               getMenuItems={menuItems}
             />
           </ul>
+          <button
+            type="button"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            className="lg:hidden col-start-9 col-end-10 flex justify-end items-center"
+            aria-label="Toggle menu"
+          >
+            <div className="p-2 rounded-md hover:bg-gray-100">
+              <span className="block w-6 h-0.5 bg-black mb-1"></span>
+              <span className="block w-6 h-0.5 bg-black mb-1"></span>
+              <span className="block w-6 h-0.5 bg-black"></span>
+            </div>
+          </button>
           <div className="col-start-10 col-end-12 flex justify-end">
             <button
               onClick={() =>
@@ -145,18 +159,64 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
+        {mobileOpen && (
+          <div className="lg:hidden border-t border-gray-200 bg-white px-6 sm:px-8">
+            <ul className="py-4 flex flex-col gap-2">
+              {menuItems.map((item) => (
+                <li key={item.id} className="w-full">
+                  {!item.children ? (
+                    <LinkScroll
+                      to={item.id}
+                      spy={true}
+                      smooth={true}
+                      duration={800}
+                      offset={-80}
+                      onClick={() => {
+                        setActiveLink(item.id);
+                        setMobileOpen(false);
+                      }}
+                      className={`block w-full rounded-lg px-4 py-3 font-bold transition ${
+                        activeLink === item.id
+                          ? "text-green-600 bg-green-50"
+                          : "text-black hover:bg-gray-100"
+                      }`}
+                    >
+                      {item.label}
+                    </LinkScroll>
+                  ) : (
+                    <>
+                      <div className="block w-full rounded-lg px-4 py-3 font-bold text-black bg-gray-50">
+                        {item.label}
+                      </div>
+
+                      <ul className="mt-2 ml-3 border-l border-gray-200 pl-3 flex flex-col gap-2">
+                        {item.children.map((child) => (
+                          <li key={child.id}>
+                            <LinkScroll
+                              to={child.id}
+                              smooth={true}
+                              duration={800}
+                              offset={-80}
+                              onClick={() => {
+                                setActiveLink(child.id);
+                                setMobileOpen(false);
+                              }}
+                              className="flex items-center gap-2 rounded-lg px-3 py-2 font-semibold text-black hover:bg-green-50 hover:text-green-700 transition"
+                            >
+                              <IoIosArrowDroprightCircle className="text-sm text-gray-400" />
+                              {child.label}
+                            </LinkScroll>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </header>
-      <nav className="fixed lg:hidden bottom-0 left-0 right-0 z-20 px-4 sm:px-8 shadow-t">
-        <div className="bg-white-500 sm:px-3">
-          <ul className="overflow-x-auto flex w-full justify-between items-center text-[#000]">
-            <CreateMenus
-              setActiveLink={setActiveLink}
-              activeLink={activeLink}
-              getMenuItems={menuItems}
-            />
-          </ul>
-        </div>
-      </nav>
     </>
   );
 }

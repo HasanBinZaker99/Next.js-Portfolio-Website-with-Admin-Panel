@@ -5,23 +5,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import about from "../../../assets/about.png";
 
-function variants() {
-  return {
-    offscreen: {
-      y: 100,
-      opacity: 0,
-    },
-    onscreen: ({ duration = 2 } = {}) => ({
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        duration,
-      },
-    }),
-  };
-}
-
 const skillItemVariant = {
   hidden: { y: 20, opacity: 0 },
   visible: {
@@ -32,7 +15,7 @@ const skillItemVariant = {
 
 export default function ClientAboutView({ data }) {
   console.log(data, "ClientAboutView");
-  const setVariants = useMemo(() => variants(), []);
+
   const aboutDataInfo = [
     {
       label: "clients",
@@ -66,9 +49,7 @@ export default function ClientAboutView({ data }) {
                     ? "sm:justify-center"
                     : "sm:justify-end"
               } py-4 sm:py-6 w-8//12 px-4 sm:w-auto mx-auto sm:mx-0`}
-              key={index}
               custom={{ duration: 2 + index }}
-              variants={setVariants}
             >
               <div className="flex m-0 w-40 sm:w-auto ">
                 <div className="flex flex-col">
@@ -100,27 +81,21 @@ export default function ClientAboutView({ data }) {
         </div>
       </AnimationWrapper>
       <div className="grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-2 gap-8">
-        <AnimationWrapper className="flex w-full">
-          <motion.div variants={setVariants} className="h-full w-full p-4">
-            <Image
-              src={about}
-              alt="about image"
-              layout="responsive"
-              height={414}
-              width={508}
-            ></Image>
-          </motion.div>
+        <AnimationWrapper className="flex w-full h-full p-4">
+          <Image
+            src={about}
+            alt="about image"
+            layout="responsive"
+            height={414}
+            width={508}
+          ></Image>
         </AnimationWrapper>
         <AnimationWrapper className={"flex items-center w-full p-4"}>
-          <motion.div
-            variants={setVariants}
-            className="grid gap-4 grid-cols-3 h-full max-h-[200px] w-full"
-          >
+          <motion.div className="grid gap-4 grid-cols-3 h-full max-h-[200px] w-full">
             {data?.skills.split(",").map((skill) => (
               <motion.div
                 key={`${skill}`}
                 className="w-full flex justify-center items-center"
-                variants={skillItemVariant}
               >
                 <button className="whitespace-nowrap text-ellipsis overflow-hidden py-3 w-[160px] px-6 border-[2px] border-green-500 bg-[#fff] text-black font-bold rounded-lg text-xl tracking-widest hover:shadow-green-500 transition-all outline-none">
                   {skill}

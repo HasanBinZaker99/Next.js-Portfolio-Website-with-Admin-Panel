@@ -12,22 +12,6 @@ import {
 import Image from "next/image";
 import home from "../../../assets/home.png";
 
-function variants() {
-  return {
-    offscreen: {
-      y: 150,
-      opacity: 0,
-    },
-    onscreen: ({ duration = 2 } = {}) => ({
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        duration,
-      },
-    }),
-  };
-}
 const socialIcons = [
   {
     id: "website",
@@ -78,17 +62,12 @@ const socialIcons = [
   },
 ];
 export default function ClientHomeView({ data }) {
-  console.log(data, "ClientHomeView");
-  const setVariants = useMemo(() => variants(), []);
   const containerRef = useRef(null);
 
   return (
     <div className="max-w-screen-xl mt-24 px-8 xl:px-16 mx-auto" id="home">
       <AnimationWrapper>
-        <motion.div
-          className="grid grid-flow grid-rows-2 md:grid-rows-1 sm:grid-col-2 gap-12 py-10 sm:py-20 sm:grid-flow-col"
-          variants={setVariants}
-        >
+        <motion.div className="grid grid-flow grid-rows-2 md:grid-rows-1 sm:grid-col-2 gap-12 py-10 sm:py-20 sm:grid-flow-col">
           <div className="flex flex-col justify-center items-start row-start-2 sm:row-start-1  ">
             <h1 className="mb-6 text-4xl  lg:text-5xl xl:text-6xl font-bold leading-snug">
               {data && data.length

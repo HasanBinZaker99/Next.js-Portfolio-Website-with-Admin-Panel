@@ -74,7 +74,7 @@ export default function ClientContactView() {
           </h1>
         </div>
       </AnimationWrapper>
-      <div className="text-gray-500 relative">
+      <AnimationWrapper className="text-gray-500 relative">
         <div className="containter px-5">
           <div className="w-full">
             <div className="flex flex-wrap -m-2">
@@ -119,7 +119,7 @@ export default function ClientContactView() {
                       ></input>
                     </div>
                   </div>
-                )
+                ),
               )}
               {showSuccessMessage && (
                 <p className="text-[14px] font-bold my-[8px] text-green-600 animate-bounce">
@@ -138,7 +138,7 @@ export default function ClientContactView() {
             </div>
           </div>
         </div>
-      </div>
+      </AnimationWrapper>
     </div>
   );
 }
