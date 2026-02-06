@@ -143,7 +143,7 @@ export default function Navbar() {
               <span className="block w-6 h-0.5 bg-black"></span>
             </div>
           </button>
-          <div className="col-start-10 col-end-12 flex justify-end">
+          <div className="col-start-10 col-end-12 flex justify-end hidden lg:flex">
             <button
               onClick={() =>
                 scroller.scrollTo("contact", {
