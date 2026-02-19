@@ -1,7 +1,5 @@
 "use client";
-import Image from "next/image";
 import { useState, useEffect, Children } from "react";
-import logo from "../../../assets/logo.png";
 import { Link as LinkScroll, scroller } from "react-scroll";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 
@@ -110,15 +108,15 @@ export default function Navbar() {
         <nav className="max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
           <div className="col-start-1 col-end-2 flex items-center">
             <div className="cursor-pointer flex items-center">
-              <div className="flex flex-col leading-tight">
-                <span
-                  className={` text-[18px] font-semibold text-gray-900 ${
-                    pulse ? "animate-pulse" : ""
-                  }`}
-                >
+              <div
+                className={`flex flex-col leading-tight ${
+                  pulse ? "animate-pulse" : ""
+                }`}
+              >
+                <span className=" text-[18px] font-semibold text-gray-900 ">
                   Hasan <span className="text-green-500">Zaker</span>
                 </span>
-                <span className="text-[12px] text-black font-bold ">
+                <span className="text-[12px] text-black font-bold">
                   Full-Stack Engineer
                 </span>
               </div>
